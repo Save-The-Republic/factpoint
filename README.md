@@ -1,44 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Gatsby Auth starter with AWS Amplify
 
-## Available Scripts
+This auth starter implements a basic authentication flow for signing up signing in users as well as protected client side routing using [AWS Amplify](https://amplify.aws). Auth features:
+- User sign up
+- User sign in
+- Multi-factor Authentication
+- User sign-out
 
-In the project directory, you can run:
+![Gatsby Amplify](src/images/gatby-auth.gif)
 
-### `yarn start`
+# Deploy to the Amplify console
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Click the button to deploy a fullstack app in your AWS account:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dabit3/gatsby-auth-starter-aws-amplify)
 
-### `yarn test`
+You can now continuously deploy changes to your frontend or backend and Amplify Console will automatically deploy those changes.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- <img src="https://github.com/swaminator/gatsby-auth-starter-aws-amplify/blob/master/src/images/amplify-console.gif" width="800"/> -->
+![Amplify Console](src/images/amplify-console.gif)
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Run locally
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Create the project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+gatsby new gatsby-amplify-auth https://github.com/dabit3/gatsby-auth-starter-aws-amplify
+```
 
-### `yarn eject`
+2. Change into the new directory
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+cd gatsby-amplify-auth
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Change into the new directory
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+yarn
+# or
+npm install
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Install & configure the AWS Amplify CLI.
 
-## Learn More
+```sh
+npm install -g @aws-amplify/cli
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+amplify configure
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> To see a video of how to configure the CLI, click [here](https://www.youtube.com/watch?v=fWbM5DLh25U)
+
+5. Create a new AWS Amplify Project
+
+```
+amplify init
+```
+
+> Here, walk through the following steps:
+
+- Enter a name for the project __YOURPROJECTNAME__
+- Enter a name for the environment __master__
+- Choose your default editor: __Visual Studio Code__ (or your editor of choice)
+- Choose the type of app that you're building __javascript__
+- What javascript framework are you using __react__
+- Source Directory Path: __src__
+- Distribution Directory Path: __public__
+- Build Command: __npm run-script build__
+- Start Command: __npm run-script develop__
+
+6. Push the updated project configuration to AWS. It will deploy a CloudFormation template that has an Amazon Cognito resource that enables user authentication.
+
+```sh
+amplify push
+```
+
+7. Then you can run it by:
+```sh
+gatsby develop
+```
